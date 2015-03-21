@@ -7,3 +7,6 @@
 /InternetKillSwitchService/bin/Debug/*.exe
 /InternetKillSwitchService/bin/*
 /*.user
+packages/*
+/bin
+obj

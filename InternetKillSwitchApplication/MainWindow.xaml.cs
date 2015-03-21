@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using InternetKillSwitchApplication.Extensions;
 using InternetKillSwitchApplication.KillSwitch;
 using InternetKillSwitchApplication.ViewModel;
 
@@ -25,6 +26,12 @@ namespace InternetKillSwitchApplication
         {
             DataContext = new KillSwitchViewModel();
             InitializeComponent();
+
+            DragDropHelper.ItemDropped += new EventHandler<DragDropEventArgs>(DragDropHelper_ItemDropped);
+        }
+
+        private void DragDropHelper_ItemDropped(object sender, DragDropEventArgs dragDropEventArgs)
+        {
         }
     }
 }

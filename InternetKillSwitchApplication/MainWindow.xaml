@@ -1,10 +1,85 @@
 ﻿<Window x:Class="InternetKillSwitchApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:extensions="clr-namespace:InternetKillSwitchApplication.Extensions"
+        xmlns:internetKillSwitchApplication="clr-namespace:InternetKillSwitchApplication"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <ListBox ItemsSource="{Binding Path=NetworkAdapters}" DisplayMemberPath="NetConnectionId">
-            
-        </ListBox>
-    </Grid>
+    <Window.Resources>
+        <internetKillSwitchApplication:NetworkDragDropAdornerBase x:Key="DragDropAdornerBase"/>
+    </Window.Resources>
+    <Canvas>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <GroupBox
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.RowSpan="2"
+            Header="All Network Connections">
+                <ListBox
+                ItemsSource="{Binding Path=NetworkAdapters}" 
+                DisplayMemberPath="ConnectionName"
+                AllowDrop="True"                
+                extensions:DragDropHelper.IsDragSource="true" 
+                extensions:DragDropHelper.DragDropControl="{StaticResource DragDropAdornerBase}"
+                extensions:DragDropHelper.DropTarget="dropTarget"
+                extensions:DragDropHelper.AdornerLayer="adornerLayer">
+                </ListBox>
+            </GroupBox>
+
+            <GroupBox
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.RowSpan="1"
+            Header="Local Network Connections">
+                <ListBox
+                ItemsSource="{Binding Path=LocalNetworkConnections}" 
+                DisplayMemberPath="ConnectionName"
+                AllowDrop="True"
+                extensions:DragDropHelper.IsDragSource="true" 
+                extensions:DragDropHelper.DragDropControl="{StaticResource DragDropAdornerBase}"
+                extensions:DragDropHelper.DropTarget="dropTarget1"
+                extensions:DragDropHelper.AdornerLayer="adornerLayer">
+                </ListBox>
+            </GroupBox>
+
+            <GroupBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.RowSpan="1"
+            Header="VPN Connections">
+                <ListBox
+                ItemsSource="{Binding Path=VpnNetworkConnections}" 
+                DisplayMemberPath="ConnectionName"
+                AllowDrop="True"
+                extensions:DragDropHelper.IsDragSource="true" 
+                extensions:DragDropHelper.DragDropControl="{StaticResource DragDropAdornerBase}"
+                extensions:DragDropHelper.DropTarget="dropTarget2"
+                extensions:DragDropHelper.AdornerLayer="adornerLayer">
+                </ListBox>
+            </GroupBox>
+
+            <StackPanel 
+            Orientation="Horizontal"
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Right"
+            >
+                <Button
+                Content="Save"/>
+                <Button
+                Content="Cancel"/>
+            </StackPanel>
+        </Grid>
+        <Canvas x:Name="adornerLayer" Visibility="Collapsed"/>
+    </Canvas>
+
 </Window>

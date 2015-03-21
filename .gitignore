@@ -8,5 +8,5 @@
 /InternetKillSwitchService/bin/*
 /*.user
 packages/*
-/bin
+bin
 obj

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="056bd49e-573e-45ac-9e16-9eb9f91c9dd4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.pipe://localhost/KillSwitchService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="8c0fb846-1378-45c5-9cc3-99426c82b1b0" SourceId="1" SourceUrl="net.pipe://localhost/KillSwitchService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="a69ad142-4240-4c1a-bde8-569fbd08d179" SourceId="1" SourceUrl="net.pipe://localhost/KillSwitchService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="7d95570b-210b-40e9-854a-10f354d7f7da" SourceId="1" SourceUrl="net.pipe://localhost/KillSwitchService/mex" />
+    <MetadataFile FileName="ROOT.CIMV2.Win32.xsd" MetadataType="Schema" ID="125db272-5e2d-4b30-90b6-8128536c283a" SourceId="1" SourceUrl="net.pipe://localhost/KillSwitchService/mex" />
+    <MetadataFile FileName="System.ComponentModel.xsd" MetadataType="Schema" ID="17b5b4f1-a8ea-4277-a404-f85a6fc1de7d" SourceId="1" SourceUrl="net.pipe://localhost/KillSwitchService/mex" />
+    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="90d2f7ad-ceba-47f6-9b5b-86e2ef17c3b1" SourceId="1" SourceUrl="net.pipe://localhost/KillSwitchService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="a23f43c9-4e1a-4699-ba4d-c41a42f081e3" SourceId="1" SourceUrl="net.pipe://localhost/KillSwitchService/mex" />
+    <MetadataFile FileName="System.Management.xsd" MetadataType="Schema" ID="4e75215b-a2de-4b53-8680-01cef8d5e818" SourceId="1" SourceUrl="net.pipe://localhost/KillSwitchService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

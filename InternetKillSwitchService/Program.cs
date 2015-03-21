@@ -12,6 +12,9 @@ namespace InternetKillSwitchService
         /// </summary>
         static void Main()
         {
+            log4net.Config.XmlConfigurator.Configure();
+            LoggingExtensions.Logging.Log.InitializeWith<LoggingExtensions.log4net.Log4NetLog>();
+
 #if(!DEBUG)
            ServiceBase[] ServicesToRun;
            ServicesToRun = new ServiceBase[] 

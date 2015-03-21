@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ROOT.CIMV2.Win32" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ROOT.CIMV2.Win32" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Management" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.ComponentModel" />
+  <xs:complexType name="ArrayOfNetworkAdapter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NetworkAdapter" nillable="true" type="tns:NetworkAdapter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNetworkAdapter" nillable="true" type="tns:ArrayOfNetworkAdapter" />
+  <xs:complexType name="NetworkAdapter">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System.ComponentModel" base="q1:Component">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AutoCommit" type="xs:boolean" />
+          <xs:element minOccurs="0" name="NetConnectionID" nillable="true" type="xs:string" />
+          <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="NetworkAddresses" nillable="true" type="q2:ArrayOfstring" />
+          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.Management" minOccurs="0" name="Path" nillable="true" type="q3:ManagementPath" />
+          <xs:element minOccurs="0" name="PowerManagementCapabilities" nillable="true" type="tns:ArrayOfNetworkAdapter.PowerManagementCapabilitiesValues" />
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System.Management" minOccurs="0" name="Scope" nillable="true" type="q4:ManagementScope" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="NetworkAdapter" nillable="true" type="tns:NetworkAdapter" />
+  <xs:complexType name="ArrayOfNetworkAdapter.PowerManagementCapabilitiesValues">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NetworkAdapter.PowerManagementCapabilitiesValues" type="tns:NetworkAdapter.PowerManagementCapabilitiesValues" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNetworkAdapter.PowerManagementCapabilitiesValues" nillable="true" type="tns:ArrayOfNetworkAdapter.PowerManagementCapabilitiesValues" />
+  <xs:simpleType name="NetworkAdapter.PowerManagementCapabilitiesValues">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown0" />
+      <xs:enumeration value="Not_Supported" />
+      <xs:enumeration value="Disabled" />
+      <xs:enumeration value="Enabled" />
+      <xs:enumeration value="Power_Saving_Modes_Entered_Automatically" />
+      <xs:enumeration value="Power_State_Settable" />
+      <xs:enumeration value="Power_Cycling_Supported" />
+      <xs:enumeration value="Timed_Power_On_Supported" />
+      <xs:enumeration value="NULL_ENUM_VALUE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="NetworkAdapter.PowerManagementCapabilitiesValues" nillable="true" type="tns:NetworkAdapter.PowerManagementCapabilitiesValues" />
+</xs:schema>

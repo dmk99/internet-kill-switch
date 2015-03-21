@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/System.Management" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System.Management" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ManagementPath">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClassName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NamespacePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Path" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RelativePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Server" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ManagementPath" nillable="true" type="tns:ManagementPath" />
+  <xs:complexType name="ManagementScope">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Options" nillable="true" type="tns:ConnectionOptions" />
+      <xs:element minOccurs="0" name="Path" nillable="true" type="tns:ManagementPath" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ManagementScope" nillable="true" type="tns:ManagementScope" />
+  <xs:complexType name="ConnectionOptions">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ManagementOptions">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Authentication" type="tns:AuthenticationLevel" />
+          <xs:element minOccurs="0" name="Authority" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EnablePrivileges" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Impersonation" type="tns:ImpersonationLevel" />
+          <xs:element minOccurs="0" name="Locale" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ConnectionOptions" nillable="true" type="tns:ConnectionOptions" />
+  <xs:complexType name="ManagementOptions">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Context" nillable="true" type="q1:ArrayOfanyType" />
+      <xs:element minOccurs="0" name="Timeout" type="ser:duration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ManagementOptions" nillable="true" type="tns:ManagementOptions" />
+  <xs:simpleType name="AuthenticationLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default" />
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Connect" />
+      <xs:enumeration value="Call" />
+      <xs:enumeration value="Packet" />
+      <xs:enumeration value="PacketIntegrity" />
+      <xs:enumeration value="PacketPrivacy" />
+      <xs:enumeration value="Unchanged">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AuthenticationLevel" nillable="true" type="tns:AuthenticationLevel" />
+  <xs:simpleType name="ImpersonationLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default" />
+      <xs:enumeration value="Anonymous" />
+      <xs:enumeration value="Identify" />
+      <xs:enumeration value="Impersonate" />
+      <xs:enumeration value="Delegate" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ImpersonationLevel" nillable="true" type="tns:ImpersonationLevel" />
+</xs:schema>

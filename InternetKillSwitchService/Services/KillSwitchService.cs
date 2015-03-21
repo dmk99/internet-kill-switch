@@ -21,6 +21,8 @@ namespace InternetKillSwitchService.Services
         {
             var adapters = GetNetworkAdapters();
 
+            this.Log().Info("Constructor....");
+
             _allAdapters = adapters.ToDictionary(i => i.NetConnectionID, i => i);
             _allVpnAdaptersToWatch = new List<string>();
             _allLocalAdaptersToWatch = new List<string>();
@@ -31,6 +33,7 @@ namespace InternetKillSwitchService.Services
         /// </summary>
         public void NetworkChangeOnNetworkAvailabilityChanged()
         {
+            this.Log().Info("A change to the network occurred.");
             var disconnected = new List<string>();
             var allNetworkAdapters = GetNetworkAdapters().ToDictionary(i => i.NetConnectionID, i => i);
 

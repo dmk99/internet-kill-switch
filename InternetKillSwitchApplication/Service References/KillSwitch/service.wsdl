@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="KillSwitchService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="InternetKillSwitchService.KillSwitchService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256>
+                </sp:Basic256>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict>
+                </sp:Strict>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ROOT.CIMV2.Win32" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.ComponentModel" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Management" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IKillSwitchService_NetworkChangeOnNetworkAvailabilityChanged_InputMessage">
+    <wsdl:part name="parameters" element="tns:NetworkChangeOnNetworkAvailabilityChanged" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_NetworkChangeOnNetworkAvailabilityChanged_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NetworkChangeOnNetworkAvailabilityChangedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_GetNetworkAdapters_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNetworkAdapters" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_GetNetworkAdapters_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNetworkAdaptersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_DisableNetworkAdapter_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisableNetworkAdapter" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_DisableNetworkAdapter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisableNetworkAdapterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_EnableNetworkAdapter_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnableNetworkAdapter" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_EnableNetworkAdapter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnableNetworkAdapterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_TryGetNetworkAdapterName_InputMessage">
+    <wsdl:part name="parameters" element="tns:TryGetNetworkAdapterName" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_TryGetNetworkAdapterName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TryGetNetworkAdapterNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_GetIpAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIpAddress" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_GetIpAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIpAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_EnableAllLocal_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnableAllLocal" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_EnableAllLocal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnableAllLocalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_EnableAllVpn_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnableAllVpn" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_EnableAllVpn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnableAllVpnResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_DisableAllLocal_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisableAllLocal" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_DisableAllLocal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisableAllLocalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_DisableAllVpn_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisableAllVpn" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_DisableAllVpn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisableAllVpnResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_AddVpnAdapters_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddVpnAdapters" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_AddVpnAdapters_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddVpnAdaptersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_AddLocalAdapters_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddLocalAdapters" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_AddLocalAdapters_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddLocalAdaptersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_RemoveVpnAdapters_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveVpnAdapters" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_RemoveVpnAdapters_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveVpnAdaptersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_RemoveLocalAdapters_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveLocalAdapters" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_RemoveLocalAdapters_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveLocalAdaptersResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IKillSwitchService">
+    <wsdl:operation name="NetworkChangeOnNetworkAvailabilityChanged">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/NetworkChangeOnNetworkAvailabilityChanged" message="tns:IKillSwitchService_NetworkChangeOnNetworkAvailabilityChanged_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/NetworkChangeOnNetworkAvailabilityChangedResponse" message="tns:IKillSwitchService_NetworkChangeOnNetworkAvailabilityChanged_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNetworkAdapters">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/GetNetworkAdapters" message="tns:IKillSwitchService_GetNetworkAdapters_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/GetNetworkAdaptersResponse" message="tns:IKillSwitchService_GetNetworkAdapters_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DisableNetworkAdapter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/DisableNetworkAdapter" message="tns:IKillSwitchService_DisableNetworkAdapter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/DisableNetworkAdapterResponse" message="tns:IKillSwitchService_DisableNetworkAdapter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EnableNetworkAdapter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/EnableNetworkAdapter" message="tns:IKillSwitchService_EnableNetworkAdapter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/EnableNetworkAdapterResponse" message="tns:IKillSwitchService_EnableNetworkAdapter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TryGetNetworkAdapterName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/TryGetNetworkAdapterName" message="tns:IKillSwitchService_TryGetNetworkAdapterName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/TryGetNetworkAdapterNameResponse" message="tns:IKillSwitchService_TryGetNetworkAdapterName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIpAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/GetIpAddress" message="tns:IKillSwitchService_GetIpAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/GetIpAddressResponse" message="tns:IKillSwitchService_GetIpAddress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EnableAllLocal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/EnableAllLocal" message="tns:IKillSwitchService_EnableAllLocal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/EnableAllLocalResponse" message="tns:IKillSwitchService_EnableAllLocal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EnableAllVpn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/EnableAllVpn" message="tns:IKillSwitchService_EnableAllVpn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/EnableAllVpnResponse" message="tns:IKillSwitchService_EnableAllVpn_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DisableAllLocal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/DisableAllLocal" message="tns:IKillSwitchService_DisableAllLocal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/DisableAllLocalResponse" message="tns:IKillSwitchService_DisableAllLocal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DisableAllVpn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/DisableAllVpn" message="tns:IKillSwitchService_DisableAllVpn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/DisableAllVpnResponse" message="tns:IKillSwitchService_DisableAllVpn_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddVpnAdapters">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/AddVpnAdapters" message="tns:IKillSwitchService_AddVpnAdapters_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/AddVpnAdaptersResponse" message="tns:IKillSwitchService_AddVpnAdapters_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddLocalAdapters">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/AddLocalAdapters" message="tns:IKillSwitchService_AddLocalAdapters_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/AddLocalAdaptersResponse" message="tns:IKillSwitchService_AddLocalAdapters_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveVpnAdapters">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/RemoveVpnAdapters" message="tns:IKillSwitchService_RemoveVpnAdapters_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/RemoveVpnAdaptersResponse" message="tns:IKillSwitchService_RemoveVpnAdapters_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLocalAdapters">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/RemoveLocalAdapters" message="tns:IKillSwitchService_RemoveLocalAdapters_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/RemoveLocalAdaptersResponse" message="tns:IKillSwitchService_RemoveLocalAdapters_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InternetKillSwitchService.KillSwitchService" type="tns:IKillSwitchService">
+    <wsp:PolicyReference URI="#InternetKillSwitchService.KillSwitchService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/named-pipe" />
+    <wsdl:operation name="NetworkChangeOnNetworkAvailabilityChanged">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/NetworkChangeOnNetworkAvailabilityChanged" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNetworkAdapters">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/GetNetworkAdapters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableNetworkAdapter">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/DisableNetworkAdapter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnableNetworkAdapter">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/EnableNetworkAdapter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TryGetNetworkAdapterName">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/TryGetNetworkAdapterName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIpAddress">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/GetIpAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnableAllLocal">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/EnableAllLocal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnableAllVpn">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/EnableAllVpn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableAllLocal">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/DisableAllLocal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableAllVpn">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/DisableAllVpn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddVpnAdapters">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/AddVpnAdapters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLocalAdapters">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/AddLocalAdapters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveVpnAdapters">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/RemoveVpnAdapters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLocalAdapters">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/RemoveLocalAdapters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="KillSwitchService">
+    <wsdl:port name="InternetKillSwitchService.KillSwitchService" binding="tns:InternetKillSwitchService.KillSwitchService">
+      <soap12:address location="net.pipe://localhost/KillSwitchService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.pipe://localhost/KillSwitchService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>David-PC\David</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

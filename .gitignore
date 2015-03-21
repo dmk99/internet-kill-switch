@@ -1,0 +1,8 @@
+/*.suo
+/InternetKillSwitchService/bin/Debug/*.pdb
+/InternetKillSwitchService/obj/Debug/*.cache
+/InternetKillSwitchService/obj/Debug/InternetKillSwitchService.csproj.FileListAbsolute.txt
+/InternetKillSwitchService/obj/Debug/*.exe
+/InternetKillSwitchService/obj/Debug/*.pdb
+/InternetKillSwitchService/bin/Debug/*.exe
+/InternetKillSwitchService/bin/*

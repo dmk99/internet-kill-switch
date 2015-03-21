@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/InternetKillSwitchService.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/InternetKillSwitchService.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfNetworkAdapterCustom">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NetworkAdapterCustom" nillable="true" type="tns:NetworkAdapterCustom" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNetworkAdapterCustom" nillable="true" type="tns:ArrayOfNetworkAdapterCustom" />
+  <xs:complexType name="NetworkAdapterCustom">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConnectionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ConnectionStatus" type="xs:unsignedInt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NetworkAdapterCustom" nillable="true" type="tns:NetworkAdapterCustom" />
+</xs:schema>

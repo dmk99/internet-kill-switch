@@ -37,11 +37,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ROOT.CIMV2.Win32" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.ComponentModel" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System" />
-      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Management" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/InternetKillSwitchService.Data" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IKillSwitchService_NetworkChangeOnNetworkAvailabilityChanged_InputMessage">
@@ -50,11 +46,11 @@
   <wsdl:message name="IKillSwitchService_NetworkChangeOnNetworkAvailabilityChanged_OutputMessage">
     <wsdl:part name="parameters" element="tns:NetworkChangeOnNetworkAvailabilityChangedResponse" />
   </wsdl:message>
-  <wsdl:message name="IKillSwitchService_GetNetworkAdapters_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetNetworkAdapters" />
+  <wsdl:message name="IKillSwitchService_GetSimplifiedNetworkAdapters_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSimplifiedNetworkAdapters" />
   </wsdl:message>
-  <wsdl:message name="IKillSwitchService_GetNetworkAdapters_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetNetworkAdaptersResponse" />
+  <wsdl:message name="IKillSwitchService_GetSimplifiedNetworkAdapters_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSimplifiedNetworkAdaptersResponse" />
   </wsdl:message>
   <wsdl:message name="IKillSwitchService_DisableNetworkAdapter_InputMessage">
     <wsdl:part name="parameters" element="tns:DisableNetworkAdapter" />
@@ -67,12 +63,6 @@
   </wsdl:message>
   <wsdl:message name="IKillSwitchService_EnableNetworkAdapter_OutputMessage">
     <wsdl:part name="parameters" element="tns:EnableNetworkAdapterResponse" />
-  </wsdl:message>
-  <wsdl:message name="IKillSwitchService_TryGetNetworkAdapterName_InputMessage">
-    <wsdl:part name="parameters" element="tns:TryGetNetworkAdapterName" />
-  </wsdl:message>
-  <wsdl:message name="IKillSwitchService_TryGetNetworkAdapterName_OutputMessage">
-    <wsdl:part name="parameters" element="tns:TryGetNetworkAdapterNameResponse" />
   </wsdl:message>
   <wsdl:message name="IKillSwitchService_GetIpAddress_InputMessage">
     <wsdl:part name="parameters" element="tns:GetIpAddress" />
@@ -133,9 +123,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/NetworkChangeOnNetworkAvailabilityChanged" message="tns:IKillSwitchService_NetworkChangeOnNetworkAvailabilityChanged_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/NetworkChangeOnNetworkAvailabilityChangedResponse" message="tns:IKillSwitchService_NetworkChangeOnNetworkAvailabilityChanged_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetNetworkAdapters">
-      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/GetNetworkAdapters" message="tns:IKillSwitchService_GetNetworkAdapters_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/GetNetworkAdaptersResponse" message="tns:IKillSwitchService_GetNetworkAdapters_OutputMessage" />
+    <wsdl:operation name="GetSimplifiedNetworkAdapters">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/GetSimplifiedNetworkAdapters" message="tns:IKillSwitchService_GetSimplifiedNetworkAdapters_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/GetSimplifiedNetworkAdaptersResponse" message="tns:IKillSwitchService_GetSimplifiedNetworkAdapters_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DisableNetworkAdapter">
       <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/DisableNetworkAdapter" message="tns:IKillSwitchService_DisableNetworkAdapter_InputMessage" />
@@ -144,10 +134,6 @@
     <wsdl:operation name="EnableNetworkAdapter">
       <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/EnableNetworkAdapter" message="tns:IKillSwitchService_EnableNetworkAdapter_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/EnableNetworkAdapterResponse" message="tns:IKillSwitchService_EnableNetworkAdapter_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="TryGetNetworkAdapterName">
-      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/TryGetNetworkAdapterName" message="tns:IKillSwitchService_TryGetNetworkAdapterName_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/TryGetNetworkAdapterNameResponse" message="tns:IKillSwitchService_TryGetNetworkAdapterName_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetIpAddress">
       <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/GetIpAddress" message="tns:IKillSwitchService_GetIpAddress_InputMessage" />
@@ -199,8 +185,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetNetworkAdapters">
-      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/GetNetworkAdapters" style="document" />
+    <wsdl:operation name="GetSimplifiedNetworkAdapters">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/GetSimplifiedNetworkAdapters" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -219,15 +205,6 @@
     </wsdl:operation>
     <wsdl:operation name="EnableNetworkAdapter">
       <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/EnableNetworkAdapter" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="TryGetNetworkAdapterName">
-      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/TryGetNetworkAdapterName" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

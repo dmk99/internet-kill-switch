@@ -6,6 +6,7 @@ using System.Net.NetworkInformation;
 using System.ServiceModel;
 using System.Text;
 using System.Threading;
+using InternetKillSwitchService.Data;
 using ROOT.CIMV2.Win32;
 
 namespace InternetKillSwitchService.Interfaces
@@ -24,7 +25,7 @@ namespace InternetKillSwitchService.Interfaces
         /// </summary>
         /// <returns>The list of network adapters.</returns>
         [OperationContract]
-        IEnumerable<NetworkAdapter> GetNetworkAdapters();
+        IEnumerable<NetworkAdapterCustom> GetSimplifiedNetworkAdapters();
 
         /// <summary>
         /// Disable the selected network adapter.
@@ -32,7 +33,7 @@ namespace InternetKillSwitchService.Interfaces
         /// <param name="o">The object to disable.</param>
         /// <returns>True if the invocation succeeds.</returns>
         [OperationContract]
-        bool DisableNetworkAdapter(NetworkAdapter o);
+        bool DisableNetworkAdapter(NetworkAdapterCustom o);
 
         /// <summary>
         /// Enable the selected network adapter.
@@ -40,16 +41,7 @@ namespace InternetKillSwitchService.Interfaces
         /// <param name="o">The object to disable.</param>
         /// <returns>True if the invocation succeeds.</returns>
         [OperationContract]
-        bool EnableNetworkAdapter(NetworkAdapter o);
-
-        /// <summary>
-        /// Try and get the name of the management object.
-        /// </summary>
-        /// <param name="o">The object to get the name of.</param>
-        /// <param name="name">The name of the network adapter if it exists.</param>
-        /// <returns>The name if it exists.</returns>
-        [OperationContract]
-        bool TryGetNetworkAdapterName(NetworkAdapter o, out string name);
+        bool EnableNetworkAdapter(NetworkAdapterCustom o);
 
         /// <summary>
         /// Get the current IP address.
@@ -87,27 +79,27 @@ namespace InternetKillSwitchService.Interfaces
         /// </summary>
         /// <param name="adapters">The adapters to add.</param>
         [OperationContract]
-        void AddVpnAdapters(IEnumerable<NetworkAdapter> adapters);
+        void AddVpnAdapters(IEnumerable<NetworkAdapterCustom> adapters);
 
         /// <summary>
         /// Add local adapters, when the VPN is not in use.
         /// </summary>
         /// <param name="adapters">The adapters to add.</param>
         [OperationContract]
-        void AddLocalAdapters(IEnumerable<NetworkAdapter> adapters);
+        void AddLocalAdapters(IEnumerable<NetworkAdapterCustom> adapters);
 
         /// <summary>
         /// Remove the VPN adapters.
         /// </summary>
         /// <param name="adapters">The adapters to remove.</param>
         [OperationContract]
-        void RemoveVpnAdapters(IEnumerable<NetworkAdapter> adapters);
+        void RemoveVpnAdapters(IEnumerable<NetworkAdapterCustom> adapters);
 
         /// <summary>
         /// Remove the Local adapters.
         /// </summary>
         /// <param name="adapters">The adapters to remove.</param>
         [OperationContract]
-        void RemoveLocalAdapters(IEnumerable<NetworkAdapter> adapters);
+        void RemoveLocalAdapters(IEnumerable<NetworkAdapterCustom> adapters);
     }
 }

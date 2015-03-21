@@ -62,7 +62,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ViewModel\KillSwitchViewModel.cs" />
     <Page Include="MainWindow.xaml">
@@ -103,13 +102,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\KillSwitch\Arrays.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\KillSwitch\InternetKillSwitchApplication.KillSwitch.NetworkAdapter.datasource">
+    <None Include="Service References\KillSwitch\InternetKillSwitchApplication.KillSwitch.NetworkAdapterCustom.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\KillSwitch\ROOT.CIMV2.Win32.xsd">
+    <None Include="Service References\KillSwitch\InternetKillSwitchService.Data.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\KillSwitch\service.wsdl" />
@@ -117,15 +113,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\KillSwitch\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\KillSwitch\System.ComponentModel.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\KillSwitch\System.Management.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\KillSwitch\System.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

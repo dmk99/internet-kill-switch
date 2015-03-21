@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/ROOT.CIMV2.Win32" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/InternetKillSwitchService.Data" />
   <xs:element name="NetworkChangeOnNetworkAvailabilityChanged">
     <xs:complexType>
       <xs:sequence />
@@ -11,22 +11,22 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetNetworkAdapters">
+  <xs:element name="GetSimplifiedNetworkAdapters">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetNetworkAdaptersResponse">
+  <xs:element name="GetSimplifiedNetworkAdaptersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ROOT.CIMV2.Win32" minOccurs="0" name="GetNetworkAdaptersResult" nillable="true" type="q1:ArrayOfNetworkAdapter" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/InternetKillSwitchService.Data" minOccurs="0" name="GetSimplifiedNetworkAdaptersResult" nillable="true" type="q1:ArrayOfNetworkAdapterCustom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DisableNetworkAdapter">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ROOT.CIMV2.Win32" minOccurs="0" name="o" nillable="true" type="q2:NetworkAdapter" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/InternetKillSwitchService.Data" minOccurs="0" name="o" nillable="true" type="q2:NetworkAdapterCustom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -40,7 +40,7 @@
   <xs:element name="EnableNetworkAdapter">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ROOT.CIMV2.Win32" minOccurs="0" name="o" nillable="true" type="q3:NetworkAdapter" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/InternetKillSwitchService.Data" minOccurs="0" name="o" nillable="true" type="q3:NetworkAdapterCustom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -48,21 +48,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="EnableNetworkAdapterResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="TryGetNetworkAdapterName">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ROOT.CIMV2.Win32" minOccurs="0" name="o" nillable="true" type="q4:NetworkAdapter" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="TryGetNetworkAdapterNameResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="TryGetNetworkAdapterNameResult" type="xs:boolean" />
-        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -121,7 +106,7 @@
   <xs:element name="AddVpnAdapters">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ROOT.CIMV2.Win32" minOccurs="0" name="adapters" nillable="true" type="q5:ArrayOfNetworkAdapter" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/InternetKillSwitchService.Data" minOccurs="0" name="adapters" nillable="true" type="q4:ArrayOfNetworkAdapterCustom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -133,7 +118,7 @@
   <xs:element name="AddLocalAdapters">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ROOT.CIMV2.Win32" minOccurs="0" name="adapters" nillable="true" type="q6:ArrayOfNetworkAdapter" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/InternetKillSwitchService.Data" minOccurs="0" name="adapters" nillable="true" type="q5:ArrayOfNetworkAdapterCustom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -145,7 +130,7 @@
   <xs:element name="RemoveVpnAdapters">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ROOT.CIMV2.Win32" minOccurs="0" name="adapters" nillable="true" type="q7:ArrayOfNetworkAdapter" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/InternetKillSwitchService.Data" minOccurs="0" name="adapters" nillable="true" type="q6:ArrayOfNetworkAdapterCustom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -157,7 +142,7 @@
   <xs:element name="RemoveLocalAdapters">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ROOT.CIMV2.Win32" minOccurs="0" name="adapters" nillable="true" type="q8:ArrayOfNetworkAdapter" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/InternetKillSwitchService.Data" minOccurs="0" name="adapters" nillable="true" type="q7:ArrayOfNetworkAdapterCustom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -5,6 +5,7 @@ using System.Management;
 using System.Net.NetworkInformation;
 using System.ServiceModel;
 using System.Text;
+using InternetKillSwitchService.Data;
 using InternetKillSwitchService.Interfaces;
 using ROOT.CIMV2.Win32;
 
@@ -66,12 +67,13 @@ namespace InternetKillSwitchService.Services
         /// Get all the network adapters that currently exist.
         /// </summary>
         /// <returns>The list of network adapters.</returns>
-        public IEnumerable<NetworkAdapter> GetNetworkAdapters()
+        public IEnumerable<NetworkAdapterCustom> GetSimplifiedNetworkAdapters()
         {
+            this.Log().Info("GetNetworkAdapters");
             var wmiQuery = new SelectQuery("SELECT * FROM Win32_NetworkAdapter WHERE NetConnectionId != NULL");
             var searchProcedure = new ManagementObjectSearcher(wmiQuery);
 
-            return from ManagementObject item in searchProcedure.Get() select new NetworkAdapter(item);
+            return from ManagementObject item in searchProcedure.Get() select new NetworkAdapterCustom(new NetworkAdapter(item));
         }
 
         /// <summary>
@@ -79,9 +81,16 @@ namespace InternetKillSwitchService.Services
         /// </summary>
         /// <param name="o">The object to disable.</param>
         /// <returns>True if the invocation succeeds.</returns>
-        public bool DisableNetworkAdapter(NetworkAdapter o)
+        public bool DisableNetworkAdapter(NetworkAdapterCustom o)
         {
-            return o.Disable() != 0;
+            NetworkAdapter adapter;
+
+            if (TryGetNetworkAdapterFromCustom(o, out adapter))
+            {
+                return adapter.Disable() != 0;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -89,9 +98,16 @@ namespace InternetKillSwitchService.Services
         /// </summary>
         /// <param name="o">The object to disable.</param>
         /// <returns>True if the invocation succeeds.</returns>
-        public bool EnableNetworkAdapter(NetworkAdapter o)
+        public bool EnableNetworkAdapter(NetworkAdapterCustom o)
         {
-            return o.Enable() != 0;
+            NetworkAdapter adapter;
+
+            if (TryGetNetworkAdapterFromCustom(o, out adapter))
+            {
+                return adapter.Enable() != 0;   
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -169,13 +185,13 @@ namespace InternetKillSwitchService.Services
         /// Add VPN adapters to keep track of them.
         /// </summary>
         /// <param name="adapters">The adapters to add.</param>
-        public void AddVpnAdapters(IEnumerable<NetworkAdapter> adapters)
+        public void AddVpnAdapters(IEnumerable<NetworkAdapterCustom> adapters)
         {
             foreach (var networkAdapter in adapters)
             {
-                if (_allVpnAdaptersToWatch.Contains(networkAdapter.NetConnectionID) == false)
+                if (_allVpnAdaptersToWatch.Contains(networkAdapter.ConnectionName) == false)
                 {
-                    _allVpnAdaptersToWatch.Add(networkAdapter.NetConnectionID);
+                    _allVpnAdaptersToWatch.Add(networkAdapter.ConnectionName);
                 }
             }
         }
@@ -184,13 +200,13 @@ namespace InternetKillSwitchService.Services
         /// Add local adapters, when the VPN is not in use.
         /// </summary>
         /// <param name="adapters">The adapters to add.</param>
-        public void AddLocalAdapters(IEnumerable<NetworkAdapter> adapters)
+        public void AddLocalAdapters(IEnumerable<NetworkAdapterCustom> adapters)
         {
             foreach (var networkAdapter in adapters)
             {
-                if (_allLocalAdaptersToWatch.Contains(networkAdapter.NetConnectionID) == false)
+                if (_allLocalAdaptersToWatch.Contains(networkAdapter.ConnectionName) == false)
                 {
-                    _allLocalAdaptersToWatch.Add(networkAdapter.NetConnectionID);
+                    _allLocalAdaptersToWatch.Add(networkAdapter.ConnectionName);
                 }
             }
         }
@@ -199,11 +215,11 @@ namespace InternetKillSwitchService.Services
         /// Remove the VPN adapters.
         /// </summary>
         /// <param name="adapters">The adapters to remove.</param>
-        public void RemoveVpnAdapters(IEnumerable<NetworkAdapter> adapters)
+        public void RemoveVpnAdapters(IEnumerable<NetworkAdapterCustom> adapters)
         {
             foreach (var networkAdapter in adapters)
             {
-                _allVpnAdaptersToWatch.Remove(networkAdapter.NetConnectionID);
+                _allVpnAdaptersToWatch.Remove(networkAdapter.ConnectionName);
             }
         }
 
@@ -211,12 +227,44 @@ namespace InternetKillSwitchService.Services
         /// Remove the Local adapters.
         /// </summary>
         /// <param name="adapters">The adapters to remove.</param>
-        public void RemoveLocalAdapters(IEnumerable<NetworkAdapter> adapters)
+        public void RemoveLocalAdapters(IEnumerable<NetworkAdapterCustom> adapters)
         {
             foreach (var networkAdapter in adapters)
             {
-                _allLocalAdaptersToWatch.Remove(networkAdapter.NetConnectionID);
+                _allLocalAdaptersToWatch.Remove(networkAdapter.ConnectionName);
             }
+        }
+
+        /// <summary>
+        /// Get all the network adapters that currently exist.
+        /// </summary>
+        /// <returns>The list of network adapters.</returns>
+        private IEnumerable<NetworkAdapter> GetNetworkAdapters()
+        {
+            this.Log().Info("GetNetworkAdapters");
+            var wmiQuery = new SelectQuery("SELECT * FROM Win32_NetworkAdapter WHERE NetConnectionId != NULL");
+            var searchProcedure = new ManagementObjectSearcher(wmiQuery);
+
+            return from ManagementObject item in searchProcedure.Get() select new NetworkAdapter(item);
+        }
+
+        /// <summary>
+        /// Return the adapter and true if it exists. False otherwise.
+        /// </summary>
+        /// <param name="o">The object to search for.</param>
+        /// <param name="networkAdapter">The output if found.</param>
+        /// <returns>True if successful.</returns>
+        private bool TryGetNetworkAdapterFromCustom(NetworkAdapterCustom o, out NetworkAdapter networkAdapter)
+        {
+            networkAdapter = null;
+
+            if (_allAdapters.ContainsKey(o.ConnectionName) == false)
+            {
+                return false;
+            }
+
+            networkAdapter = _allAdapters[o.ConnectionName];
+            return true;
         }
     }
 }

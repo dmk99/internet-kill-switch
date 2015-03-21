@@ -1,4 +1,6 @@
-﻿namespace ROOT.CIMV2.Win32 {
+﻿using System.Runtime.Serialization;
+
+namespace ROOT.CIMV2.Win32 {
     using System;
     using System.ComponentModel;
     using System.Management;

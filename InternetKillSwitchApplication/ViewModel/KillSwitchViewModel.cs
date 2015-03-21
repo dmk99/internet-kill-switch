@@ -16,14 +16,14 @@ namespace InternetKillSwitchApplication.ViewModel
         /// </summary>
         public KillSwitchViewModel()
         {
-            _killSwitchServiceClient = new KillSwitchServiceClient();
+            _killSwitchServiceClient = new KillSwitchServiceClient("InternetKillSwitchService.KillSwitchService");
 
-            NetworkAdapters = new ObservableCollection<NetworkAdapter>(_killSwitchServiceClient.GetNetworkAdapters());
+            NetworkAdapters = new ObservableCollection<NetworkAdapterCustom>(_killSwitchServiceClient.GetSimplifiedNetworkAdapters());
         }
 
         /// <summary>
         /// Gets or sets the network adapters.
         /// </summary>
-        public ObservableCollection<NetworkAdapter> NetworkAdapters { get; set; } 
+        public ObservableCollection<NetworkAdapterCustom> NetworkAdapters { get; set; } 
     }
 }

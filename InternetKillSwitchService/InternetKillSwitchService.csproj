@@ -59,6 +59,7 @@
     <Compile Include="Data\NetworkAdapter.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Data\NetworkAdapterCustom.cs" />
     <Compile Include="Interfaces\IKillSwitchService.cs" />
     <Compile Include="LogExtensions.cs" />
     <Compile Include="Service1.cs">

@@ -147,6 +147,15 @@ namespace InternetKillSwitchApplication.KillSwitch {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKillSwitchService/RemoveLocalAdapters", ReplyAction="http://tempuri.org/IKillSwitchService/RemoveLocalAdaptersResponse")]
         void RemoveLocalAdapters(InternetKillSwitchApplication.KillSwitch.NetworkAdapterCustom[] adapters);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKillSwitchService/IsPaused", ReplyAction="http://tempuri.org/IKillSwitchService/IsPausedResponse")]
+        bool IsPaused();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKillSwitchService/SetPaused", ReplyAction="http://tempuri.org/IKillSwitchService/SetPausedResponse")]
+        void SetPaused();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKillSwitchService/SetUnpaused", ReplyAction="http://tempuri.org/IKillSwitchService/SetUnpausedResponse")]
+        void SetUnpaused();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -226,6 +235,18 @@ namespace InternetKillSwitchApplication.KillSwitch {
         
         public void RemoveLocalAdapters(InternetKillSwitchApplication.KillSwitch.NetworkAdapterCustom[] adapters) {
             base.Channel.RemoveLocalAdapters(adapters);
+        }
+        
+        public bool IsPaused() {
+            return base.Channel.IsPaused();
+        }
+        
+        public void SetPaused() {
+            base.Channel.SetPaused();
+        }
+        
+        public void SetUnpaused() {
+            base.Channel.SetUnpaused();
         }
     }
 }

@@ -101,5 +101,24 @@ namespace InternetKillSwitchService.Interfaces
         /// <param name="adapters">The adapters to remove.</param>
         [OperationContract]
         void RemoveLocalAdapters(IEnumerable<NetworkAdapterCustom> adapters);
+
+        /// <summary>
+        /// Return true if the service is paused.
+        /// </summary>
+        /// <returns>True if the service is paused.</returns>
+        [OperationContract]
+        bool IsPaused();
+
+        /// <summary>
+        /// Set the service to be paused.
+        /// </summary>
+        [OperationContract]
+        void SetPaused();
+
+        /// <summary>
+        /// Set the service to be unpaused.
+        /// </summary>
+        [OperationContract]
+        void SetUnpaused();
     }
 }

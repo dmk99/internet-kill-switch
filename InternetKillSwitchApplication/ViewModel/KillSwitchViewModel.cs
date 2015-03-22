@@ -22,6 +22,14 @@ namespace InternetKillSwitchApplication.ViewModel
             
             NetworkAdapters = new ObservableCollection<NetworkAdapterCustom>(_killSwitchServiceClient.GetSimplifiedNetworkAdapters());
 
+            InitializeCommands();
+        }
+
+        /// <summary>
+        /// Initial the commands.
+        /// </summary>
+        private void InitializeCommands()
+        {
             SetToNoneCommand = new DelegateCommand(() =>
             {
                 if (SelectedAdapter != null)

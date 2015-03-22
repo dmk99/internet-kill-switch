@@ -2,70 +2,12 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:internetKillSwitchApplication="clr-namespace:InternetKillSwitchApplication"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         Title="MainWindow" Height="350" Width="525"
-        Name="root">
+        Visibility="Hidden"
+        ShowInTaskbar="False"
+        x:Name="root">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <GroupBox
-            Grid.Row="0"
-            Grid.Column="0"
-            Grid.RowSpan="2"
-            Header="All Network Connections">
-            <ListBox
-                ItemsSource="{Binding Path=NetworkAdapters}" 
-                AllowDrop="True"
-                SelectedItem="{Binding Path=SelectedAdapter, Mode=TwoWay}"
-                Tag="{Binding DataContext, RelativeSource={RelativeSource Mode=Self}}">
-                <ListBox.ContextMenu>
-                    <ContextMenu
-                        DataContext="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
-                        <MenuItem 
-                            Header="Set to Local" 
-                            Command="{Binding Path=SetToLocalCommand}"
-                            CommandParameter="{Binding}"/>
-                        <MenuItem 
-                            Header="Set to VPN"
-                            Command="{Binding Path=SetToVpnCommand}"
-                            CommandParameter="{Binding}"/>
-                        <MenuItem 
-                            Header="Set to None"
-                            Command="{Binding Path=SetToNoneCommand}"
-                            CommandParameter="{Binding}"/>
-                    </ContextMenu>
-                </ListBox.ContextMenu>
-                
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="ContentTemplate">
-                            <Setter.Value>
-                                <DataTemplate>
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding ConnectionName}"/>
-                                        <TextBlock Text="{Binding Category}"></TextBlock>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
-        </GroupBox>
 
-        <StackPanel 
-            Orientation="Horizontal"
-            Grid.Row="2"
-            Grid.Column="0"
-            HorizontalAlignment="Right"
-            >
-            <Button
-                Content="Save"
-                Command="{Binding Path=SaveCommand}"/>
-            <Button
-                Content="Cancel"/>
-        </StackPanel>
     </Grid>
 </Window>

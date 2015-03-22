@@ -9,24 +9,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InternetKillSwitchApplication.KillSwitch;
 using InternetKillSwitchApplication.ViewModel;
 
 namespace InternetKillSwitchApplication
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Options.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Options : Window
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        public MainWindow()
+        public Options()
         {
             InitializeComponent();
+            DataContext = new KillSwitchViewModel();
         }
     }
 }

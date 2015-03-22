@@ -17,6 +17,7 @@ namespace InternetKillSwitchService.Services
         private IDictionary<string, NetworkAdapter> _allAdapters;
         private IList<string> _allVpnAdaptersToWatch;
         private IList<string> _allLocalAdaptersToWatch;
+        private bool _isPaused;
 
         public KillSwitchService()
         {
@@ -27,6 +28,8 @@ namespace InternetKillSwitchService.Services
             _allAdapters = adapters.ToDictionary(i => i.NetConnectionID, i => i);
             _allVpnAdaptersToWatch = new List<string>();
             _allLocalAdaptersToWatch = new List<string>();
+
+            _isPaused = false;
         }
 
         /// <summary>
@@ -34,6 +37,12 @@ namespace InternetKillSwitchService.Services
         /// </summary>
         public void NetworkChangeOnNetworkAvailabilityChanged()
         {
+            if (_isPaused)
+            {
+                this.Log().Info("The service is currently paused...");
+                return;
+            }
+
             this.Log().Info("A change to the network occurred.");
             var disconnected = new List<string>();
             var allNetworkAdapters = GetNetworkAdapters().ToDictionary(i => i.NetConnectionID, i => i);
@@ -47,6 +56,7 @@ namespace InternetKillSwitchService.Services
             }
 
             var disableLocal = false;
+            var localDisconnected = false;
 
             foreach (var disconnect in disconnected)
             {
@@ -55,9 +65,14 @@ namespace InternetKillSwitchService.Services
                     disableLocal = true;
                     break;
                 }
+
+                if (_allLocalAdaptersToWatch.Contains(disconnect))
+                {
+                    localDisconnected = true;
+                }
             }
 
-            if (disableLocal)
+            if (disableLocal && localDisconnected == false)
             {
                 DisableAllLocal();
             }
@@ -241,6 +256,31 @@ namespace InternetKillSwitchService.Services
                 this.Log().Info("Removing {0} from Local List", networkAdapter.ConnectionName);
                 _allLocalAdaptersToWatch.Remove(networkAdapter.ConnectionName);
             }
+        }
+
+        /// <summary>
+        /// Return true if the service is paused.
+        /// </summary>
+        /// <returns>True if the service is paused.</returns>
+        public bool IsPaused()
+        {
+            return _isPaused;
+        }
+
+        /// <summary>
+        /// Set the service to be paused.
+        /// </summary>
+        public void SetPaused()
+        {
+            _isPaused = true;
+        }
+
+        /// <summary>
+        /// Set the service to be unpaused.
+        /// </summary>
+        public void SetUnpaused()
+        {
+            _isPaused = false;
         }
 
         /// <summary>

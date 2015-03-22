@@ -118,6 +118,24 @@
   <wsdl:message name="IKillSwitchService_RemoveLocalAdapters_OutputMessage">
     <wsdl:part name="parameters" element="tns:RemoveLocalAdaptersResponse" />
   </wsdl:message>
+  <wsdl:message name="IKillSwitchService_IsPaused_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsPaused" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_IsPaused_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsPausedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_SetPaused_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetPaused" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_SetPaused_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetPausedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_SetUnpaused_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetUnpaused" />
+  </wsdl:message>
+  <wsdl:message name="IKillSwitchService_SetUnpaused_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetUnpausedResponse" />
+  </wsdl:message>
   <wsdl:portType name="IKillSwitchService">
     <wsdl:operation name="NetworkChangeOnNetworkAvailabilityChanged">
       <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/NetworkChangeOnNetworkAvailabilityChanged" message="tns:IKillSwitchService_NetworkChangeOnNetworkAvailabilityChanged_InputMessage" />
@@ -170,6 +188,18 @@
     <wsdl:operation name="RemoveLocalAdapters">
       <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/RemoveLocalAdapters" message="tns:IKillSwitchService_RemoveLocalAdapters_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/RemoveLocalAdaptersResponse" message="tns:IKillSwitchService_RemoveLocalAdapters_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsPaused">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/IsPaused" message="tns:IKillSwitchService_IsPaused_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/IsPausedResponse" message="tns:IKillSwitchService_IsPaused_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPaused">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/SetPaused" message="tns:IKillSwitchService_SetPaused_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/SetPausedResponse" message="tns:IKillSwitchService_SetPaused_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUnpaused">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKillSwitchService/SetUnpaused" message="tns:IKillSwitchService_SetUnpaused_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKillSwitchService/SetUnpausedResponse" message="tns:IKillSwitchService_SetUnpaused_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="InternetKillSwitchService.KillSwitchService" type="tns:IKillSwitchService">
@@ -286,6 +316,33 @@
     </wsdl:operation>
     <wsdl:operation name="RemoveLocalAdapters">
       <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/RemoveLocalAdapters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsPaused">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/IsPaused" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPaused">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/SetPaused" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUnpaused">
+      <soap12:operation soapAction="http://tempuri.org/IKillSwitchService/SetUnpaused" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

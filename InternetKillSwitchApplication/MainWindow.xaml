@@ -4,82 +4,90 @@
         xmlns:extensions="clr-namespace:InternetKillSwitchApplication.Extensions"
         xmlns:internetKillSwitchApplication="clr-namespace:InternetKillSwitchApplication"
         Title="MainWindow" Height="350" Width="525">
-    <Window.Resources>
-        <internetKillSwitchApplication:NetworkDragDropAdornerBase x:Key="DragDropAdornerBase"/>
-    </Window.Resources>
-    <Canvas>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <GroupBox
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <GroupBox
             Grid.Row="0"
             Grid.Column="0"
             Grid.RowSpan="2"
             Header="All Network Connections">
-                <ListBox
+            <ListBox
                 ItemsSource="{Binding Path=NetworkAdapters}" 
                 DisplayMemberPath="ConnectionName"
-                AllowDrop="True"                
-                extensions:DragDropHelper.IsDragSource="true" 
-                extensions:DragDropHelper.DragDropControl="{StaticResource DragDropAdornerBase}"
-                extensions:DragDropHelper.DropTarget="dropTarget"
-                extensions:DragDropHelper.AdornerLayer="adornerLayer">
-                </ListBox>
-            </GroupBox>
+                AllowDrop="True">
+            </ListBox>
+        </GroupBox>
 
-            <GroupBox
+        <GroupBox
             Grid.Row="0"
-            Grid.Column="1"
+            Grid.Column="2"
             Grid.RowSpan="1"
             Header="Local Network Connections">
-                <ListBox
+            <ListBox
                 ItemsSource="{Binding Path=LocalNetworkConnections}" 
                 DisplayMemberPath="ConnectionName"
-                AllowDrop="True"
-                extensions:DragDropHelper.IsDragSource="true" 
-                extensions:DragDropHelper.DragDropControl="{StaticResource DragDropAdornerBase}"
-                extensions:DragDropHelper.DropTarget="dropTarget1"
-                extensions:DragDropHelper.AdornerLayer="adornerLayer">
-                </ListBox>
-            </GroupBox>
+                AllowDrop="True">
+            </ListBox>
+        </GroupBox>
 
-            <GroupBox
+        <GroupBox
             Grid.Row="1"
-            Grid.Column="1"
+            Grid.Column="2"
             Grid.RowSpan="1"
             Header="VPN Connections">
-                <ListBox
+            <ListBox
                 ItemsSource="{Binding Path=VpnNetworkConnections}" 
                 DisplayMemberPath="ConnectionName"
-                AllowDrop="True"
-                extensions:DragDropHelper.IsDragSource="true" 
-                extensions:DragDropHelper.DragDropControl="{StaticResource DragDropAdornerBase}"
-                extensions:DragDropHelper.DropTarget="dropTarget2"
-                extensions:DragDropHelper.AdornerLayer="adornerLayer">
-                </ListBox>
-            </GroupBox>
+                AllowDrop="True">
+            </ListBox>
+        </GroupBox>
 
-            <StackPanel 
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="1">
+            <Button 
+                Margin="5">
+                Add >>
+            </Button>
+            <Button
+                Margin="5">
+                &lt;&lt; Remove
+            </Button>
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="1">
+            <Button 
+                Margin="5">
+                Add >>
+            </Button>
+            <Button
+                Margin="5">
+                &lt;&lt; Remove
+            </Button>
+        </StackPanel>
+
+        <StackPanel 
             Orientation="Horizontal"
             Grid.Row="2"
             Grid.Column="0"
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
             HorizontalAlignment="Right"
             >
-                <Button
+            <Button
                 Content="Save"/>
-                <Button
+            <Button
                 Content="Cancel"/>
-            </StackPanel>
-        </Grid>
-        <Canvas x:Name="adornerLayer" Visibility="Collapsed"/>
-    </Canvas>
-
+        </StackPanel>
+    </Grid>
 </Window>

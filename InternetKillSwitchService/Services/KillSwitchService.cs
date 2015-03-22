@@ -144,6 +144,7 @@ namespace InternetKillSwitchService.Services
         {
             foreach (var local in _allLocalAdaptersToWatch)
             {
+                this.Log().Info("Enabling {0}", local);
                 _allAdapters[local].Enable();
             }
         }
@@ -155,6 +156,7 @@ namespace InternetKillSwitchService.Services
         {
             foreach (var local in _allVpnAdaptersToWatch)
             {
+                this.Log().Info("Enabling {0}", local);
                 _allAdapters[local].Enable();
             }
         }
@@ -166,6 +168,7 @@ namespace InternetKillSwitchService.Services
         {
             foreach (var local in _allLocalAdaptersToWatch)
             {
+                this.Log().Info("Disabling {0}", local);
                 _allAdapters[local].Disable();
             }
         }
@@ -177,6 +180,7 @@ namespace InternetKillSwitchService.Services
         {
             foreach (var local in _allVpnAdaptersToWatch)
             {
+                this.Log().Info("Disabling {0}", local);
                 _allAdapters[local].Disable();
             }
         }
@@ -191,6 +195,7 @@ namespace InternetKillSwitchService.Services
             {
                 if (_allVpnAdaptersToWatch.Contains(networkAdapter.ConnectionName) == false)
                 {
+                    this.Log().Info("Adding {0} to VPN List", networkAdapter.ConnectionName);
                     _allVpnAdaptersToWatch.Add(networkAdapter.ConnectionName);
                 }
             }
@@ -206,6 +211,7 @@ namespace InternetKillSwitchService.Services
             {
                 if (_allLocalAdaptersToWatch.Contains(networkAdapter.ConnectionName) == false)
                 {
+                    this.Log().Info("Adding {0} to Local List", networkAdapter.ConnectionName);
                     _allLocalAdaptersToWatch.Add(networkAdapter.ConnectionName);
                 }
             }
@@ -219,6 +225,7 @@ namespace InternetKillSwitchService.Services
         {
             foreach (var networkAdapter in adapters)
             {
+                this.Log().Info("Removing {0} from VPN List", networkAdapter.ConnectionName);
                 _allVpnAdaptersToWatch.Remove(networkAdapter.ConnectionName);
             }
         }
@@ -231,6 +238,7 @@ namespace InternetKillSwitchService.Services
         {
             foreach (var networkAdapter in adapters)
             {
+                this.Log().Info("Removing {0} from Local List", networkAdapter.ConnectionName);
                 _allLocalAdaptersToWatch.Remove(networkAdapter.ConnectionName);
             }
         }

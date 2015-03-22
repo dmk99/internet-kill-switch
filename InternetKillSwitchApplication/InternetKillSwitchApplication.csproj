@@ -59,10 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\AddCommand.cs" />
     <Compile Include="Commands\CancelCommand.cs" />
-    <Compile Include="Commands\RemoveCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
+    <Compile Include="netfx\System\Guard.cs" />
+    <Compile Include="netfx\System\Windows\Input\DelegateCommand.cs" />
     <Compile Include="Service References\KillSwitch\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

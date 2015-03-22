@@ -23,6 +23,9 @@ namespace InternetKillSwitchApplication.KillSwitch {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private InternetKillSwitchApplication.KillSwitch.NetworkAdapterCategory CategoryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ConnectionNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -35,6 +38,19 @@ namespace InternetKillSwitchApplication.KillSwitch {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public InternetKillSwitchApplication.KillSwitch.NetworkAdapterCategory Category {
+            get {
+                return this.CategoryField;
+            }
+            set {
+                if ((this.CategoryField.Equals(value) != true)) {
+                    this.CategoryField = value;
+                    this.RaisePropertyChanged("Category");
+                }
             }
         }
         
@@ -72,6 +88,20 @@ namespace InternetKillSwitchApplication.KillSwitch {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NetworkAdapterCategory", Namespace="http://schemas.datacontract.org/2004/07/InternetKillSwitchService.Data")]
+    public enum NetworkAdapterCategory : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Local = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Vpn = 2,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

@@ -8,6 +8,17 @@ using ROOT.CIMV2.Win32;
 namespace InternetKillSwitchService.Data
 {
     [DataContract]
+    public enum NetworkAdapterCategory
+    {
+        [EnumMember]
+        None = 0,
+        [EnumMember]
+        Local = 1,
+        [EnumMember]
+        Vpn = 2
+    };
+
+    [DataContract]
     public class NetworkAdapterCustom
     {
         /// <summary>
@@ -19,6 +30,7 @@ namespace InternetKillSwitchService.Data
         {
             ConnectionName = connectionName;
             ConnectionStatus = connectionStatus;
+            Category = NetworkAdapterCategory.None;
         }
 
         /// <summary>
@@ -30,6 +42,9 @@ namespace InternetKillSwitchService.Data
         {
             
         }
+
+        [DataMember]
+        public NetworkAdapterCategory Category { get; set; }
 
         [DataMember]
         public string ConnectionName { get; set; }

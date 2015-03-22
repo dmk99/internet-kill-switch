@@ -8,9 +8,18 @@
   <xs:element name="ArrayOfNetworkAdapterCustom" nillable="true" type="tns:ArrayOfNetworkAdapterCustom" />
   <xs:complexType name="NetworkAdapterCustom">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Category" type="tns:NetworkAdapterCategory" />
       <xs:element minOccurs="0" name="ConnectionName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ConnectionStatus" type="xs:unsignedInt" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="NetworkAdapterCustom" nillable="true" type="tns:NetworkAdapterCustom" />
+  <xs:simpleType name="NetworkAdapterCategory">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Local" />
+      <xs:enumeration value="Vpn" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="NetworkAdapterCategory" nillable="true" type="tns:NetworkAdapterCategory" />
 </xs:schema>

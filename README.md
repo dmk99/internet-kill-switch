@@ -3,8 +3,11 @@ The idea came about for this project because some VPN services do not have a bui
 
 This project is designed for Windows 7+ and uses .net 4.0.
 
-TODO:
-1. Create taskbar application for interaction with the service.<br/>
-2. Allow user to easily add their networks to either the VPN or Local lists.<br/>
-3. Save service state (when a user adds/removes a network adapter from the lists save. When started up again reload.)<br/>
-4. WiX installer.
+TODO: <br/>
+1. Diagnose and fix UI application crash after having been run for a few hours (most likely timeout with service).
+2. Refactor code where appropriate.
+3. Implement Stop/Start service from the UI.
+4. Include Icon for the UI.
+5. Return the current IP address.
+6. Have a notify popup informing the user when something has changed in their network.
+7. WiX installer.

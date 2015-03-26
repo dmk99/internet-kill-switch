@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Management;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using System.ServiceModel;
 using System.Text;
 using InternetKillSwitchService.Data;
@@ -22,14 +25,12 @@ namespace InternetKillSwitchService.Services
         public KillSwitchService()
         {
             var adapters = GetNetworkAdapters();
-
-            this.Log().Info("Constructor....");
-
             _allAdapters = adapters.ToDictionary(i => i.NetConnectionID, i => i);
             _allVpnAdaptersToWatch = new List<string>();
             _allLocalAdaptersToWatch = new List<string>();
-
             _isPaused = false;
+
+            ReloadAdapters();
         }
 
         /// <summary>
@@ -88,7 +89,33 @@ namespace InternetKillSwitchService.Services
             var wmiQuery = new SelectQuery("SELECT * FROM Win32_NetworkAdapter WHERE NetConnectionId != NULL");
             var searchProcedure = new ManagementObjectSearcher(wmiQuery);
 
-            return from ManagementObject item in searchProcedure.Get() select new NetworkAdapterCustom(new NetworkAdapter(item));
+            var adapters = (from ManagementObject item in searchProcedure.Get()
+                select new NetworkAdapterCustom(new NetworkAdapter(item))).ToList();
+
+            foreach (var adapter in adapters)
+            {
+                adapter.Category = TryMatchAdapterCategory(adapter);
+            }
+
+            return adapters;
+        }
+
+        /// <summary>
+        /// Attempts to match the adapter name to existing adapters to find the category.
+        /// </summary>
+        private NetworkAdapterCategory TryMatchAdapterCategory(NetworkAdapterCustom adapter)
+        {
+            if (_allLocalAdaptersToWatch.Contains(adapter.ConnectionName))
+            {
+                return NetworkAdapterCategory.Local;
+            }
+
+            if (_allVpnAdaptersToWatch.Contains(adapter.ConnectionName))
+            {
+                return NetworkAdapterCategory.Vpn;
+            }
+
+            return NetworkAdapterCategory.None;
         }
 
         /// <summary>
@@ -214,6 +241,8 @@ namespace InternetKillSwitchService.Services
                     _allVpnAdaptersToWatch.Add(networkAdapter.ConnectionName);
                 }
             }
+
+            SaveVpnAdapters();
         }
 
         /// <summary>
@@ -230,6 +259,8 @@ namespace InternetKillSwitchService.Services
                     _allLocalAdaptersToWatch.Add(networkAdapter.ConnectionName);
                 }
             }
+
+            SaveLocalAdapters();
         }
 
         /// <summary>
@@ -243,6 +274,8 @@ namespace InternetKillSwitchService.Services
                 this.Log().Info("Removing {0} from VPN List", networkAdapter.ConnectionName);
                 _allVpnAdaptersToWatch.Remove(networkAdapter.ConnectionName);
             }
+
+            SaveVpnAdapters();
         }
 
         /// <summary>
@@ -256,6 +289,8 @@ namespace InternetKillSwitchService.Services
                 this.Log().Info("Removing {0} from Local List", networkAdapter.ConnectionName);
                 _allLocalAdaptersToWatch.Remove(networkAdapter.ConnectionName);
             }
+
+            SaveLocalAdapters();
         }
 
         /// <summary>
@@ -313,6 +348,71 @@ namespace InternetKillSwitchService.Services
 
             networkAdapter = _allAdapters[o.ConnectionName];
             return true;
+        }
+
+        /// <summary>
+        /// Save the adapters to file for later use.
+        /// </summary>
+        private void SaveLocalAdapters()
+        {
+            App.Default.LocalNetworks = "";
+
+            foreach (var local in _allLocalAdaptersToWatch)
+            {
+                App.Default.LocalNetworks = App.Default.LocalNetworks + local + ",";
+            }
+
+            App.Default.Save();
+        }
+
+        /// <summary>
+        /// Save the adapters to file for later use.
+        /// </summary>
+        private void SaveVpnAdapters()
+        {
+            App.Default.VpnNetworks = "";
+
+            foreach (var vpn in _allVpnAdaptersToWatch)
+            {
+                App.Default.VpnNetworks = App.Default.VpnNetworks + vpn + ",";
+            }
+
+            App.Default.Save();
+        }
+
+        /// <summary>
+        /// Reload the adapters if they already exist.
+        /// </summary>
+        private void ReloadAdapters()
+        {
+            var localNetworks = App.Default.LocalNetworks;
+            var vpnNetworks = App.Default.VpnNetworks;
+
+            if (string.IsNullOrEmpty(localNetworks) == false)
+            {
+                var networks = localNetworks.Split(',');
+
+                foreach (var network in networks)
+                {
+                    if (_allAdapters.ContainsKey(network))
+                    {
+                        _allLocalAdaptersToWatch.Add(network);
+                    }
+                }
+            }
+
+            if (string.IsNullOrEmpty(vpnNetworks) == false)
+            {
+                var networks = vpnNetworks.Split(',');
+
+                foreach (var network in networks)
+                {
+                    if (_allAdapters.ContainsKey(network))
+                    {
+                        _allVpnAdaptersToWatch.Add(network);
+                    }
+                }
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.ServiceProcess;
 using System.Text;
 
@@ -15,12 +16,13 @@ namespace InternetKillSwitchService
             log4net.Config.XmlConfigurator.Configure();
             LoggingExtensions.Logging.Log.InitializeWith<LoggingExtensions.log4net.Log4NetLog>();
 
+
 #if(!DEBUG)
            ServiceBase[] ServicesToRun;
            ServicesToRun = new ServiceBase[] 
-	   { 
-	        new MyService() 
-	   };
+	       { 
+	            new Service1() 
+	       };
            ServiceBase.Run(ServicesToRun);
 #else
             Service1 myServ = new Service1();

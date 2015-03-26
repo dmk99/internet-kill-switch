@@ -33,7 +33,6 @@ namespace InternetKillSwitchService
 
         protected override void OnStart(string[] args)
         {
-            //_host = new ServiceHost(typeof(KillSwitchService));
             _host = new ServiceHost(new KillSwitchService());
             _host.Open();
 

@@ -82,5 +82,15 @@ namespace InternetKillSwitchApplication.ViewModel
         /// The unpause service command.
         /// </summary>
         public ICommand UnpauseServiceCommand { get; set; }
+
+        /// <summary>
+        /// The start service command.
+        /// </summary>
+        public ICommand StartServiceCommand { get; set; }
+
+        /// <summary>
+        /// The stop service command.
+        /// </summary>
+        public ICommand StopServiceCommand { get; set; }
     }
 }

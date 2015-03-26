@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util='http://schemas.microsoft.com/wix/UtilExtension'>
+	<Product Id="*" Name="ServiceSetup" Language="1033" Version="1.0.0.5" Manufacturer="dmk99" UpgradeCode="09b99bf3-6f37-479e-8c35-ac210067a7af">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+    <Directory Id='TARGETDIR' Name='SourceDir'>
+
+      <Directory Id='INSTALLDIR' Name='InternetKillSwitch'>
+
+        <Component Id='MyService' Guid='2575CFDC-5F26-4D81-BCD3-81F4209B7CAD'>
+          <File Id='InternetKillSwitchService.exe' Name='InternetKillSwitchService.exe' Source='../InternetKillSwitchService/bin/Release/InternetKillSwitchService.exe' DiskId='1' KeyPath='yes' />
+          <ServiceInstall Id="InternetKillSwitch" Type="ownProcess" Name="InternetKillSwitch" DisplayName="Internet Kill Switch Service"
+                  Description="Automatically disables network adapters if a VPN disconnects" Start="auto" Account="LocalSystem" ErrorControl="normal">
+            <util:PermissionEx  User="Everyone" ServicePauseContinue="yes" ServiceQueryStatus="yes"
+                    ServiceStart="yes" ServiceStop="yes" ServiceUserDefinedControl="yes" />
+          </ServiceInstall>
+          <ServiceControl Id="InternetKillSwitchService" Start="install" Stop="both" Remove="both" Name="InternetKillSwitchService" Wait="no" />
+        </Component>
+
+        <Component Id="RequiredDlls" Guid="91E35D52-8373-48E9-920A-54C3D20CCA1F">
+          <File Id='log4net.dll' Name='log4net.dll' Source='../InternetKillSwitchService/bin/Release/log4net.dll' DiskId='1'/>
+          <File Id='this.Log.dll' Name='this.Log.dll' Source='../InternetKillSwitchService/bin/Release/this.Log.dll' DiskId='1'/>
+          <File Id='this.Loglog4net.dll' Name='this.Loglog4net.dll' Source='../InternetKillSwitchService/bin/Release/this.Log-log4net.dll' DiskId='1'/>
+        </Component>
+
+        <Component Id="RequiredFiles" Guid="91E35D52-8373-48E9-920A-54C3D20DDA1F">
+          <File Id='NLog.config' Name='NLog.config' Source='../InternetKillSwitchService/bin/Release/NLog.config' DiskId='1'/>
+          <File Id='InternetKillSwitchService.exe.config' Name='InternetKillSwitchService.exe.config' Source='../InternetKillSwitchService/bin/Release/InternetKillSwitchService.exe.config' DiskId='1'/>
+        </Component>
+      </Directory>
+
+    </Directory>
+
+    <Feature Id='Complete' Level='1'>
+      <ComponentRef Id='RequiredDlls'/>
+      <ComponentRef Id='RequiredFiles'/>
+      <ComponentRef Id='MyService' />
+    </Feature>
+	</Product>
+</Wix>
